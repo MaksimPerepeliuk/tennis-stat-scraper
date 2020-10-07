@@ -1,8 +1,9 @@
+from collections import Counter
 from stat_scraper.init_driver import get_driver
 from stat_scraper.logs.loggers import app_logger
-from stat_scraper.utils import write_csv, write_text_file
-from multiprocessing import Pool
-from tqdm import tqdm
+# from stat_scraper.utils import write_csv, write_text_file
+# from multiprocessing import Pool
+# from tqdm import tqdm
 from bs4 import BeautifulSoup
 import time
 
@@ -17,16 +18,6 @@ def get_html(url):
             return html
     except Exception:
         app_logger.exception(f'Error received html {url}\n')
-
-
-# def has_tiebreak(trs):
-#     for i, tr in enumerate(trs):
-#         h_part = tr.select('td.h-part')
-#         if len(h_part) > 0:
-#             title = h_part[0].text
-#             if 'Tiebreak' in title:
-#                 return 1
-#     return 1
 
 
 def bp_counter(line):
@@ -59,7 +50,11 @@ def points_counter(line, player_position):
     points_result = line[-1]
     if 'BPSP' in points_result:
         points = points_result[:-4]
+    elif 'MP' in points_result:
+        points = points_result[:-4]
     elif 'BP' in points_result:
+        points = points_result[:-2]
+    elif 'SP' in points_result:
         points = points_result[:-2]
     else:
         points = points_result
@@ -89,12 +84,12 @@ def get_match_line_stats(game_lines, player, n_set):
         lost_points += points[1]
         win_first_points += win_fp_counter(line_parts[0], player_position)
     return {
-            f'{n_set}set_{player}_points_len': points_length,
-            f'{n_set}set_{player}_bp': breakpoint_counts,
-            f'{n_set}set_{player}_sp': setpoint_counts,
-            f'{n_set}set_{player}_win_points': win_points,
-            f'{n_set}set_{player}_lost_points': lost_points,
-            f'{n_set}set_{player}_win_fp': win_first_points,
+            f'{player}_points_len': points_length,
+            f'{player}_bp': breakpoint_counts,
+            f'{player}_sp': setpoint_counts,
+            f'{player}_win_points': win_points,
+            f'{player}_lost_points': lost_points,
+            f'{player}_win_fp': win_first_points,
         }
 
 
@@ -108,27 +103,12 @@ def get_result_serving(game_serve, player, n_set):
         else:
             win_serve_counts += 1
     return {
-        f'{n_set}set_{player}_lost_serve': lost_serve_counts,
-        f'{n_set}set_{player}_win_serve': win_serve_counts,
+        f'{player}_lost_games': lost_serve_counts,
+        f'{player}_win_games': win_serve_counts,
     }
 
 
-# def get_serv_player_stats(serving_trs, player):
-#     game_serve, game_lines = serving_trs
-#     get_match_line_stats(game_lines, player)
-    # get_result_serving(game_serve)
-
-    # print(game_serve)
-    # for tr in serving_trs:
-    #     tds = tr.select('td')
-    #     if 'LOST' in tds[0].text or 'LOST' in tds[4].text:
-    #         lost_serve_counts += 1
-    #     else:
-    #         win_serve_counts +=1
-    #     game_line =
-
-
-def get_stat_serv_player(set_soup, n_set):
+def get_set_stats(set_soup, n_set):
     tds = set_soup.select('tr')[1].select('td')
     player_serving = ('p2', 'p1') if len(
         tds[1].select('span')) == 0 else ('p1', 'p2')
@@ -140,63 +120,69 @@ def get_stat_serv_player(set_soup, n_set):
     odd_serv_stat = get_result_serving(odd_game_serve, player_serving[0], n_set)
     even_line_stat = get_match_line_stats(even_game_line, player_serving[1], n_set)
     even_serv_stat = get_result_serving(even_game_serve, player_serving[1], n_set)
-    print(2222222222, {**odd_serv_stat, **odd_line_stat, **even_serv_stat, **even_line_stat})
-    # get_serv_player_stats((odd_game_serve, odd_game_line), player_serving[0])
-    # for tr in trs[1:]:
-    #     tds = tr.select('td')
-    #     player_serving = if len(td[1].select('span')) == 0 'p2' else 'p1'
-    #     odd_trs = trs.select('')
-    #     p_serv_stats = get_main_set_stats()
+    return {**odd_serv_stat, **odd_line_stat, **even_serv_stat, **even_line_stat}
 
 
-def get_set_stats(set_soup, n_set):
-    get_stat_serv_player(set_soup, n_set)
-    # trs = set_soup.select('table#parts tr')
-    # tiebrake_sep = get_tiebreak_separate(trs)
-    # if tiebrake_sep:
-    #     main_set_stat = trs[:tiebrake_sep]
-    #     tiebrake_stat = trs[tiebrake_sep:]
+def sort_order_total_stats(total_stats):
+    order = ['p1_win_games', 'p1_lost_games', 'p1_win_points',
+             'p1_lost_points', 'p1_win_fp', 'p1_bp', 'p1_sp',
+             'p1_points_len', 'p2_win_games', 'p2_lost_games',
+             'p2_win_points', 'p2_lost_points', 'p2_win_fp',
+             'p2_bp', 'p2_sp', 'p2_points_len']
+    ordered_ts = {}
+    for key in order:
+        ordered_ts[key] = total_stats[key]
+    return ordered_ts
 
 
-# get_set_stats(get_html('https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2'), 1)
-# print(get_html('https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2'))
+def get_total_stats(sets_stats):
+    total_stats = Counter()
+    for set_stat in sets_stats:
+        if len(set_stat) != 16:
+            raise Exception(f'Len set stats != 16 = {len(set_stat)}')
+        total_stats.update(set_stat)
+    return sort_order_total_stats(total_stats)
+
 
 def get_all_sets_stats(soup, sets_count):
-    sets_stats = {}
-    for i in range(2, 3):
+    sets_stats = []
+    for i in range(1, sets_count+1):
         set_id = f'tab-mhistory-{i}-history'
         set_soup = soup.select(f'div#{set_id}')[0]
-        get_set_stats(set_soup, i)
+        sets_stats.append(get_set_stats(set_soup, i))
+    return get_total_stats(sets_stats)
 
 
-html = get_html('https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1')
-soup = BeautifulSoup(html, 'lxml')
-get_all_sets_stats(soup, 1)
+def get_event_stats(html, url):
+    soup = BeautifulSoup(html, 'lxml')
+    date = soup.select('div#utime')[0].text
+    coverage = soup.select(
+        'div.description__match span.description__country a')[0].text.split(',')[1].strip()
+    p1 = soup.select('div.home-box div.tname__text a')[0].text.strip()
+    p2 = soup.select('div.away-box div.tname__text a')[0].text.strip()
+    result_board = soup.select(
+        'div#event_detail_current_result span.scoreboard')
+    p1_res_score = result_board[0].text
+    p2_res_score = result_board[1].text
+    match_status = soup.select(
+        'div#flashscore div.match-info div.info-status')[0].text.strip()
+    sets_count = int(p1_res_score) + int(p2_res_score)
+    sets_stats = get_all_sets_stats(soup, sets_count)
+    return {
+        'url': url,
+        'date': date,
+        'status': match_status,
+        'coverage': coverage,
+        'p1': p1,
+        'p2': p2,
+        'p1_res_score': p1_res_score,
+        'p2_res_score': p2_res_score,
+        'sets_count': sets_count,
+        **sets_stats
+    }
 
 
-# def get_events_info(html, url):
-#     soup = BeautifulSoup(html, 'lxml')
-#     date = soup.select('div#utime')[0].text
-#     p1 = soup.select('div.home-box div.tname__text a')[0].text.strip()
-#     p2 = soup.select('div.away-box div.tname__text a')[0].text.strip()
-#     result_board = soup.select(
-#         'div#event_detail_current_result span.scoreboard')
-#     p1_res_score = result_board[0].text
-#     p2_res_score = result_board[1].text
-#     match_status = soup.select('div#flashscore div.match-info div.info-status')[0].text.strip()
-#     sets_count = int(p1_res_score) + int(p2_res_score)
-#     sets_stats = get_sets_stats(url, sets_count)
-#     return {
-#         'url': url,
-#         'date': date,
-#         'status': match_status,
-#         'p1': p1,
-#         'p2': p2,
-#         'p1_res_score': p1_res_score,
-#         'p2_res_score': p2_res_score,
-#         'sets_count': sets_count,
+# url = 'https://www.flashscore.com/match/MPNrXaWq/#point-by-point;1'
+# url = 'https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1'
 
-#     }
-
-
-# get_stats(get_html('https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1'))
+# print(get_event_stats(get_html(url), url))
