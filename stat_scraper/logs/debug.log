@@ -1,0 +1,135 @@
+ERROR    sample_parser.py[LINE:18 2020-10-04 18:05-37][MainProcess][get_html] Error received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+Traceback (most recent call last):
+  File "/home/max/.cache/pypoetry/virtualenvs/tennis-stat-scraper-G8qS3J8V-py3.8/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/usr/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "stat_scraper/sample_parser.py", line 12, in get_html
+    with get_driver() as driver:
+  File "/home/max/projects/tennis-stat-scraper/stat_scraper/init_driver.py", line 10, in get_driver
+    driver = webdriver.Chrome(options=chrome_options,
+  File "/home/max/.cache/pypoetry/virtualenvs/tennis-stat-scraper-G8qS3J8V-py3.8/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/home/max/.cache/pypoetry/virtualenvs/tennis-stat-scraper-G8qS3J8V-py3.8/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:07-24][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:08-09][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:08-41][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:09-23][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:10-22][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:10-45][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:11-58][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:12-23][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:40-47][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:44-38][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:51-51][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:52-44][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:53-49][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:54-32][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:55-49][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2
+
+INFO     sample_parser.py[LINE:16 2020-10-04 18:57-07][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;2
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:07-09][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:07-44][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:09-44][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:10-41][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:11-17][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:11-48][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:31-15][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 19:33-02][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:03-18][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:03-41][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:04-01][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:25-37][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:42-12][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:42-30][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:42-49][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:43-31][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:44-34][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:44-55][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:45-42][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:47-07][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:47-31][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 20:47-49][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:25-54][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:26-17][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:27-03][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:28-08][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:37-43][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:39-11][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:39-48][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:40-20][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:41-25][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-04 21:41-45][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 12:00-35][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 12:17-03][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 12:18-26][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 12:38-36][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 12:54-09][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 13:00-27][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 13:05-12][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
+INFO     sample_parser.py[LINE:16 2020-10-05 13:19-14][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
+
