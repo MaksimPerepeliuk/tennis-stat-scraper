@@ -209,3 +209,37 @@ INFO     sample_parser.py[LINE:17 2020-10-07 14:55-47][MainProcess][get_html] Re
 
 INFO     sample_parser.py[LINE:17 2020-10-07 14:57-05][MainProcess][get_html] Received html https://www.flashscore.com/match/fyXBxdlb/#point-by-point;1
 
+INFO     stats_parser.py[LINE:17 2020-10-07 16:34-27][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:34-54][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:36-01][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:36-17][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:36-43][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:37-26][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:44-55][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:46-19][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:48-29][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:51-58][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:55-43][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:57-01][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:57-49][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:59-06][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:59-29][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 16:59-59][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
+INFO     stats_parser.py[LINE:17 2020-10-07 17:00-51][MainProcess][get_html] Received html https://www.flashscore.com/tennis/
+
