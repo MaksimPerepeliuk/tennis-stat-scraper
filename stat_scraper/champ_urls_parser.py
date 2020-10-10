@@ -1,4 +1,5 @@
 from stat_scraper.logs.loggers import app_logger
+from stat_scraper.utils import write_text_file
 from selenium.webdriver.common.keys import Keys
 from stat_scraper.stats_parser import get_html
 from stat_scraper.init_driver import get_driver
@@ -16,9 +17,13 @@ def get_champs_urls(comp_menu):
     return champ_urls
 
 
+def flatten(colls):
+    return [subcolls for elem in colls for subcolls in elem]
+
+
 def get_champ_urls_by_years(html):
     soup = BeautifulSoup(html, 'lxml')
-    base_url = 'https://www.flashscore.com{}/results/'
+    base_url = 'https://www.flashscore.com{}results/'
     champs_by_years = soup.select(
         'div#tournament-page-archiv div.leagueTable__seasonName a')
     required_years = ['2020', '2019', '2018', '2017',
@@ -36,21 +41,36 @@ def open_hide_champ_list():
     with get_driver() as driver:
         driver = get_driver()
         driver.get(url)
-        time.sleep(5)
+        time.sleep(3)
         driver.execute_script("window.scrollTo(0, 800)")
-        time.sleep(3)
+        time.sleep(2)
         driver.find_element_by_css_selector('li#lmenu_5724 a').click()
-        time.sleep(1)
+        time.sleep(2)
         driver.execute_script("window.scrollTo(0, 5500)")
-        time.sleep(3)
+        time.sleep(2)
         driver.find_element_by_css_selector('li#lmenu_5725 a').click()
-        time.sleep(3)
+        time.sleep(2)
         return driver.page_source
 
-if __name__ == '__main__':
+
+def write_urls_by_type_champ(urls, type_champ):
+    for url in tqdm(urls):
+        champ_urls_by_years = get_champ_urls_by_years(get_html(url))
+        if champ_urls_by_years:
+            [write_text_file(f'{type_champ}_champs_by_years_urls.txt', url)
+                for url in champ_urls_by_years]
+
+
+def main():
     html = open_hide_champ_list()
     soup = BeautifulSoup(html, 'lxml')
     atp_competitions = soup.select('li#lmenu_5724')[0]
     wta_competitions = soup.select('li#lmenu_5725')[0]
-    champ_urls = get_champs_urls(atp_competitions)
-    print(len(champ_urls))
+    atp_champ_urls = get_champs_urls(atp_competitions)
+    wta_champ_urls = get_champs_urls(wta_competitions)
+    write_urls_by_type_champ(atp_champ_urls, 'atp')
+    write_urls_by_type_champ(wta_champ_urls, 'wta')
+
+
+if __name__ == '__main__':
+    main()
